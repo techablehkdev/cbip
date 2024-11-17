@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sftp_connections_user,sftp_connections_user,model_sftp_connect,,1,1,1,1
+access_sftp_import_config_user,sftp_import_config_user,model_sftp_import_config,,1,1,1,1
+access_sftp_import_config_fields_user,sftp_import_config_fields_user,model_sftp_import_config_fields,,1,1,1,1
+access_source_destination_paths_user,source_destination_paths_user,model_source_destination_paths,,1,1,1,1

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="sftp_connection_tree_view">
+        <field name="name">sftp.connect.tree</field>
+        <field name="model">sftp.connect</field>
+        <field name="arch" type="xml">
+            <tree string="SFTP Connections">
+                <field name="host_name"/>
+                <field name="username"/>
+                <field name="password"/>
+                <field name="with_password"/>
+                <field name="public_key_path"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sftp_connection_form_view">
+        <field name="name">sftp.connect.form</field>
+        <field name="model">sftp.connect</field>
+        <field name="arch" type="xml">
+            <form string="SFTP Connections">
+                <sheet>
+                    <group>
+                            <field name="host_name"/>
+                            <field name="username"/>
+                            <field name="with_password"/>
+                            <field name="password" password="True" iattrs="{'required':[('with_password','=', True)]}"/>
+                            <field name="public_key_path" attrs="{'invisible':[('with_password','=', True)]}"/>
+                    </group>
+                    <group>
+                        <button name="test_connection" string="Test Connection" type="object" class="btn btn-primary"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sftp_connections_action">
+        <field name="name">SFTP Connections</field>
+        <field name="res_model">sftp.connect</field>
+        <field name="view_id" ref="sftp_connection_tree_view"/>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No SFTP Connections found
+            </p>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sftp_import_configuration_tree">
+        <field name="name">sftp.import.config.tree</field>
+        <field name="model">sftp.import.config</field>
+        <field name="arch" type="xml">
+            <tree string="SFTP Import Configurations">
+                <field name="sftp_host"/>
+<!--                <field name="remote_source_dirpath"/>-->
+<!--                <field name="remote_archive_dirpath"/>-->
+                <field name="model"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sftp_import_config_form_view">
+        <field name="name">sftp.import.config.form</field>
+        <field name="model">sftp.import.config</field>
+        <field name="arch" type="xml">
+            <form string="SFTP Import Configurations">
+                <sheet>
+                    <group class="col-9">
+                            <field name="sftp_host"/>
+<!--                            <field name="remote_source_dirpath"/>-->
+<!--                            <field name="remote_archive_dirpath"/>-->
+                    </group>
+                    <group string="Source Destination Configuration">
+                        <field name="source_destination_paths" widget="section_and_note_one2many" mode="tree">
+                            <tree string="Source Destination Configuration" editable="bottom">
+                                <field name="remote_source_dirpath"/>
+                                <field name="remote_archive_dirpath"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group><field name="model"/></group>
+                    <group string="Import Fields Mapping">
+                            <field name="fields" widget="section_and_note_one2many" mode="tree">
+                                <tree string="Fields Mapping" editable="bottom">
+                                    <field name="import_config_id" invisible="1"/>
+                                    <field name="field" domain="[('model_id','=', parent.model)]"/>
+                                    <field name="mapping_field" />
+                                </tree>
+                            </field>
+                    </group>
+                    <button class="oe_stat_button btn-primary" type="object"
+                            name="generate_sample_csv"
+                            string="Generate Sample CSV"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sftp_import_configuration_action">
+        <field name="name">SFTP Import Configurations</field>
+        <field name="res_model">sftp.import.config</field>
+        <field name="view_id" ref="sftp_import_configuration_tree"/>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No SFTP Connections found
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_sftp_connections_action" action="sftp_connections_action"
+              parent="base.menu_custom" name="SFTP Connections" sequence="1"/>
+    <menuitem id="menu_sftp_import_config_action" action="sftp_import_configuration_action"
+              parent="base.menu_custom" name="SFTP Import Configurations" sequence="2"/>
+
+
+</odoo>
