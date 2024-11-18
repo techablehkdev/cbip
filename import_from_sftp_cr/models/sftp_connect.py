@@ -34,9 +34,9 @@ class SftpConfiguration(models.Model):
         try:
             # Connect to the remote server
             if self.with_password:
-                ssh.connect(self.host_name, username=self.username, password=self.password)
+                ssh.connect(self.host_name, port=9822, username=self.username, password=self.password)
             else:
-                ssh.connect(self.host_name, username=self.username, password=self.password,
+                ssh.connect(self.host_name, port=9822, username=self.username, password=self.password,
                             key_filename=self.public_key_path)
 
             # If the connection was successful, print a success message
@@ -108,9 +108,9 @@ class SftpImportConfiguration(models.Model):
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
             if import_config.sftp_host.with_password:
-                ssh.connect(hostname,username, password=password)
+                ssh.connect(hostname, port=9822, username=username, password=password)
             else:
-                ssh.connect(hostname, username=username, password=password, key_filename=import_config.sftp_host.public_key_path)
+                ssh.connect(hostname, port=9822, username=username, password=password, key_filename=import_config.sftp_host.public_key_path)
 
             for path in import_config.source_destination_paths:
                 # open an SFTP session
