@@ -11,7 +11,8 @@
     'description': '''
              This module allows you to import file hosted on SFTP server and move imported file to another folder.
     ''',
-    'depends': ['base','crm'],
+#    'depends': ['base','crm'],
+    'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
         'data/sftp_import_file.xml',
