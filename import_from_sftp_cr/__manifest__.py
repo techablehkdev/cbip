@@ -3,7 +3,7 @@
 # See LICENSE file for full copyright and licensing details.
 {
     'name': "Import Data from SFTP File",
-    'version': "15.0.0.0",
+    'version': "15.1.0.0",
     'category': "Extra Tools",
     'author': 'Candidroot Solutions Pvt. Ltd.',
     'website': 'https://www.candidroot.com',
