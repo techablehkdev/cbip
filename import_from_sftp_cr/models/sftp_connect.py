@@ -174,10 +174,10 @@ class SftpImportConfiguration(models.Model):
                                 line += 1
 
                         # make date wise name new directory in order to move the file
-                        date_str = datetime.now().strftime('%Y-%m-%d')
-                        new_dir = os.path.join((path.remote_archive_dirpath if path.remote_archive_dirpath.endswith('/') else path.remote_archive_dirpath+'/'), date_str)
-                        if date_str not in sftp.listdir(path.remote_archive_dirpath):
-                            sftp.mkdir(new_dir)
+                        #date_str = datetime.now().strftime('%Y-%m-%d')
+                        new_dir = os.path.join((path.remote_archive_dirpath if path.remote_archive_dirpath.endswith('/') else path.remote_archive_dirpath))
+                        #if date_str not in sftp.listdir(path.remote_archive_dirpath):
+                        #    sftp.mkdir(new_dir)
 
                         # move files from one to another folder
                         sftp.posix_rename(remote_file, new_dir+'/'+f)
